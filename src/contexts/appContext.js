@@ -7,7 +7,6 @@ import {
 } from "react";
 import { getUSDTDetails } from "../services/usdtService";
 
-import toast from "./../utils/toastConfig";
 import {
   connectToMetaMask,
   getActiveWallet,
@@ -23,10 +22,10 @@ export function AppProvider({ children }) {
   const [transactions, setTransactions] = useState([]);
   const [USDTData, setUSDTData] = useState({
     name: "",
-    totalSupply: "",
-    balance: "",
+    totalSupply: 0,
+    balance: 0,
     symbol: "",
-    initialSupply: "",
+    initialSupply: 0,
   });
   const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
@@ -45,7 +44,7 @@ export function AppProvider({ children }) {
       setIsConnected(true);
       const usdtData = await getUSDTDetails(onTransactionUpdate);
 
-      setUSDTData(usdtData);
+      if (usdtData) setUSDTData(usdtData);
 
       localStorage.setItem("wallet-connection", true);
 
@@ -93,10 +92,7 @@ export function AppProvider({ children }) {
       console.log("Please Install Meta Mask");
       return setHasMetaMask(false);
     }
-    const address = getActiveWallet();
-    if (!address) {
-      toast.error("Please connect your wallet to use this app");
-    }
+
     const isInjected = localStorage.getItem("wallet-connection");
     if (!isInjected) return setIsInitiallyFetched(true);
 
