@@ -42,10 +42,13 @@ function Home() {
               <div
                 className={`row justify-content-between mb-3 ${styles["contract-name"]}`}
               >
-                <span className="col-auto">Contract Name:</span>
-                <span className="col-auto">{USDTData?.name}</span>
+                <span className="col-auto">
+                  Contract Name:{" "}
+                  <span className="col-auto">{USDTData?.name}</span>
+                </span>
+                {/* <span className="col-auto">{USDTData?.name}</span> */}
               </div>
-              <div className="row justify-content-between align-items-center mb-4">
+              <div className="row justify-content-between align-items-center mb-4 mt-5">
                 <p className={`${styles["title"]} col-auto mb-0 mx-md-auto`}>
                   Recent Transactions
                 </p>
